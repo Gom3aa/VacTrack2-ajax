@@ -124,7 +124,7 @@
           <section style="background:LightBlue">
             <h2><span class="label label-default">
                 <u>Pick My Vacation days</u></span></h2><br>
-            <form name="VactionSubmitionForm" onsubmit="JavaScript:preReqSend()">
+            <form id="VactionSubmitionForm">
               <table>
                 <thead>
                   <tr>
@@ -150,21 +150,8 @@
               <button type="button" disabled="">upload file (Disabled)</button> NotYETAVILABLE<br>
               <button type="submit" class="btn btn btn-primary">Submit My Vacation</button><br>
               <input id="search" type="search" placeholder="Search Craig's Jobs">
-              <button id="b1" onclick="f1()">bi</button>
+              <button id="b1">bi</button>
               <h2 id="results"></h2>
-              <script>
-                function f1(){
-                alert('IN-f1');
-                var p = document.getElementById('search').value;
-                var parameters = {s:`${p}`};
-                $.get( '/searchinge',parameters, function(data) {
-                $('#results').html(data);
-                //alert('routeCalling');
-                //document.getElementById('results').innerHTML = '100';
-                });
-                alert( parameters.s );
-                }
-              </script>
             </form>
           </section>
         </div>
@@ -181,21 +168,21 @@
     <script src="../../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug-->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
-  <script type="text/javascript" src="submitVacs.js"></script>
-  <script type="text/javascript">window.onload = UpdateVacationDays();</script>
-  
-  <script>
-    function f1(){
-      alert('IN-f1');
-      var p = document.getElementById('search').value;
-      var parameters = {s:`${p}`};
-      $.get( '/searchinge',parameters, function(data) {
-        $('#results').html(data);
-      //alert('routeCalling');
-      //document.getElementById('results').innerHTML = '100';
+    <script type="text/javascript" src="submitVacs.js"></script>
+
+    <script>
+    (function () {
+      $('#VactionSubmitionForm').on('submit', function(event) {
+        event.preventDefault();
+
+        var p = document.getElementById('search').value;
+        var parameters = {s:`${p}`};
+        $.get('/searchinge', parameters, function(data) {
+          $('#results').html(data);
+        });
       });
-      alert( parameters.s );
-    }
-  </script>
+    })();
+    </script>
+  </body>
+
 </html>

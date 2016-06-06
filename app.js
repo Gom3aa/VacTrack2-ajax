@@ -27,14 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req, res) {res.sendfile('views/index.html')});
 
 app.get('/searchinge', function(req, res){
-  console.log('Searchingggggg');
-  console.log('Searchingggggg');
-  console.log('Searchingggggg');
-  //alert("SEARCHINGEEE");
-  console.log(req.query);
   res.send("soo?sadaak");
-
- //console.log(req);
 });
 
 
