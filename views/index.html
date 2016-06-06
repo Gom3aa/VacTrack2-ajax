@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>EmployeeVacationMange</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script>
+      $(function a(){
+      $.get( '/searching', function(data) {
+      $('#results').html(data);
+      });
+      });
+    </script>
+    <style>
+      .navbar-inverse .navbar-brand:hover,
+      .navbar-inverse .navbar-brand:focus {
+      background-color: transparent;
+      color: #999999;
+      }
+      .borderless td, .borderless th {
+      border: none;
+      }
+    </style>
+  </head>
+  <body style="background:light">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+          <label href="#" class="navbar-brand">EmployeeVacationMange</label>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <!-- /.nav-collapse-->
+      </div>
+    </nav>
+    <div class="container">
+      <h1>
+        <center>
+          <u></u>
+          <center></center>
+        </center>
+      </h1>
+      <div role="main" class="container theme-showcase">
+        <div class="jumbotron">
+          <section style="background:LightBlue">
+            <h2><span class="label label-default">
+                <u>Emplyee Vacation Information</u></span></h2><br>
+            <div>
+              <h4>
+                <label class="label label-primary">Total Vacation Days:</label>
+              </h4><i>
+                <label style="padding-left:2%;"><font color="Blue">Allowed[
+                    <label id="AllowedVacValueID" name="AllowedVacValue">-</label>]</font> /<font color="Red">Enjoyed[
+                    <label id="EnjoyedVacValueID" name="EnjoyedVacValue">-</label>]</font> /<font color="Green">Remianing[
+                    <label id="RemianingVacValueID" name="RemianingVacValue">-</label>]</font></label></i>
+              <button id="RefreshEmpVacButtonID" name="RefreshEmpVacButton" type="button" onclick="UpdateVacationDays()" class="btn btn-sm btn-success"><b>Refresh Status</b></button><br><br>
+              <button type="button" data-toggle="collapse" data-target="#demo" class="btn btn-info">List My Vacations</button>
+              <div class="container">
+                <div id="demo" class="collapse">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>date</th>
+                            <th>Approved[?overridden]/Declined/Pending</th>
+                            <th>Change</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>6/6/2016</td>
+                            <td>Approved</td>
+                            <td>-</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>7/6/2016</td>
+                            <td>Approved</td>
+                            <td>-</td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>1/10/2016</td>
+                            <td>Approved[overridden]</td>
+                            <td>-</td>
+                          </tr>
+                          <tr>
+                            <td>4</td>
+                            <td>1/11/2016</td>
+                            <td>Declined</td>
+                            <td>-</td>
+                          </tr>
+                          <tr>
+                            <td>5</td>
+                            <td>1/12/2016</td>
+                            <td>Pending</td>
+                            <td>Change</td>
+                          </tr>
+                          <tr>
+                            <td>6</td>
+                            <td>5/12/2016</td>
+                            <td>Pending</td>
+                            <td>Change</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section style="background:LightBlue">
+            <h2><span class="label label-default">
+                <u>Pick My Vacation days</u></span></h2><br>
+            <form name="VactionSubmitionForm" onsubmit="JavaScript:preReqSend()">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Starting day:</th>
+                    <th>
+                      <input id="sDayID" type="date" name="sday">
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>Ending day:</th>
+                    <th>
+                      <input id="eDayID" type="date" name="eday" onclick="sDayIDIsNaN()"><br>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>Notes:</th>
+                    <th>
+                      <textarea id="NotesVacID" name="NotesVac"></textarea>
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+              <button type="button" disabled="">upload file (Disabled)</button> NotYETAVILABLE<br>
+              <button type="submit" class="btn btn btn-primary">Submit My Vacation</button><br>
+              <input id="search" type="search" placeholder="Search Craig's Jobs">
+              <button id="b1" onclick="f1()">bi</button>
+              <h2 id="results"></h2>
+              <script>
+                function f1(){
+                alert('IN-f1');
+                var p = document.getElementById('search').value;
+                var parameters = {s:`${p}`};
+                $.get( '/searchinge',parameters, function(data) {
+                $('#results').html(data);
+                //alert('routeCalling');
+                //document.getElementById('results').innerHTML = '100';
+                });
+                alert( parameters.s );
+                }
+              </script>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-->
+    <!--
+    Bootstrap core JavaScript
+    ==================================================
+    -->
+    <!-- Placed at the end of the document so the pages load faster-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug-->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+  <script type="text/javascript" src="submitVacs.js"></script>
+  <script type="text/javascript">window.onload = UpdateVacationDays();</script>
+  
+  <script>
+    function f1(){
+      alert('IN-f1');
+      var p = document.getElementById('search').value;
+      var parameters = {s:`${p}`};
+      $.get( '/searchinge',parameters, function(data) {
+        $('#results').html(data);
+      //alert('routeCalling');
+      //document.getElementById('results').innerHTML = '100';
+      });
+      alert( parameters.s );
+    }
+  </script>
+</html>

@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/', routes);
 //app.use('/users', users);
-app.get('/', function(req, res) {res.render('index')});
+app.get('/', function(req, res) {res.sendfile('views/index.html')});
 
 app.get('/searchinge', function(req, res){
   console.log('Searchingggggg');
@@ -32,7 +32,7 @@ app.get('/searchinge', function(req, res){
   console.log('Searchingggggg');
   //alert("SEARCHINGEEE");
   console.log(req.query);
- res.send("soo?sadaak");
+  res.send("soo?sadaak");
 
  //console.log(req);
 });
